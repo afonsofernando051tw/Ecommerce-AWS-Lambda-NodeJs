@@ -24,6 +24,7 @@ const productsAppStack = new ProductsAppSack(app, "ProductsAppStack", {
 
 const ecommerceApiStack = new EcommerceApiStack(app, "EcommerceApiStack", {
   productsFetchHandler: productsAppStack.productsFetchHandler,
+  productsAdminHandler: productsAppStack.productsAdminHandler,
   tags: tags,
   env: cdkEnv
 })
