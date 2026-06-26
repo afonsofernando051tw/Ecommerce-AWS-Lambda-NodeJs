@@ -5,7 +5,7 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
     const lambdaRequestId = context.awsRequestId;
     const apiRequestId = event.requestContext.requestId;
 
-  //  console.console.log(`API Gateway RequestId: ${apiRequestId} - Lambda RequestId: ${lambdaRequestId}`);
+  console.log(`API Gateway RequestId: ${apiRequestId} - Lambda RequestId: ${lambdaRequestId}`);
     
     const method = event.httpMethod;
     if(event.resource === "/products"){
@@ -20,6 +20,36 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
             }
             
         }
+    } else if(event.resource === "/products"){
+        if(method === 'GET'){
+            //console.log('GET')
+
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    message: "GET Products - OK"
+                })
+            }
+            
+        }
+    } else if(event.resource === "/products"){
+        if(method === 'GET'){
+            //console.log('GET')
+
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    message: "GET Products - OK"
+                })
+            }
+            
+        }
+    } else if(event.resource === "/products/{id}"){
+        const productId = event.pathParameters?.id as string;
+        console.log(`GET /products/: ${productId}`);
+        return {
+            statusCode: 200,
+            body: `GET /products/: ${productId}`}
     }
 
      return {
