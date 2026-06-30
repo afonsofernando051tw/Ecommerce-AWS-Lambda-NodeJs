@@ -1,7 +1,6 @@
 import {APIGatewayProxyEvent, APIGatewayProxyResult, Context} from "aws-lambda"
-// @ts-ignore: Lambda layer module available at runtime under /opt/nodejs
 import {ProductRepository} from "/opt/nodejs/productsLayers"
-import {Product} from "/opt/nodejs/productsLayer"
+import {Product} from "/opt/nodejs/productsLayers"
 import {DynamoDB} from "aws-sdk"
 
 const productsDdb = process.env.PRODUCTS_DDB!;
