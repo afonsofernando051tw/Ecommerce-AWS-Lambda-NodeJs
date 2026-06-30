@@ -3,7 +3,7 @@ import * as cdk from 'aws-cdk-lib';
 import { ProductsAppSack } from '../lib/productsApp-stack';
 import { EcommerceApiStack } from '../lib/ecommerceApi-stack';
 import * as dotenv from "dotenv"
-import { ProductAppLayersStack } from "../lib/productAppLayers-stacks"
+import { ProductAppLayersStack } from "../lib/productsAppLayers-stacks"
 
 dotenv.config();
 

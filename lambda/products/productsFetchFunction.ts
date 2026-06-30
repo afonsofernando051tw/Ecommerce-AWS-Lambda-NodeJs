@@ -1,4 +1,11 @@
 import {APIGatewayProxyEvent, APIGatewayProxyResult, Context} from "aws-lambda"
+// @ts-ignore: Lambda layer module available at runtime under /opt/nodejs
+import {ProductRepository} from "/opt/nodejs/productsLayers"
+import {DynamoDB} from "aws-sdk"
+
+const productsDdb = process.env.PRODUCTS_DDB!;
+const ddbClient = new DynamoDB.DocumentClient();
+const productRepository = new ProductRepository(ddbClient, productsDdb);
 
 export async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult>{
     
@@ -10,13 +17,13 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
     const method = event.httpMethod;
     if(event.resource === "/products"){
         if(method === 'GET'){
-            //console.log('GET')
+            console.log('GET')
+
+            const products = await productRepository.getAllProducts();
 
             return {
                 statusCode: 200,
-                body: JSON.stringify({
-                    message: "GET Products - OK"
-                })
+                body: JSON.stringify({products})
             }
             
         }
@@ -47,9 +54,21 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
     } else if(event.resource === "/products/{id}"){
         const productId = event.pathParameters?.id as string;
         console.log(`GET /products/: ${productId}`);
+        try{
+            const product = await productRepository.getProductById(productId);
         return {
             statusCode: 200,
-            body: `GET /products/: ${productId}`}
+            body: JSON.stringify({product})
+        }
+        }catch(error){
+            console.error((<Error>error).message);
+            return {
+                statusCode: 404,
+                body: JSON.stringify({
+                    message: (<Error>error).message
+                })
+            }
+        }
     }
 
      return {

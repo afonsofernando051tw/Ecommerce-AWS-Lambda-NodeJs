@@ -9,15 +9,15 @@ export class ProductAppLayersStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) { 
         super(scope, id, props);
 
-        this.productAppLayer = new lambda.LayerVersion(this, "ProductAppLayer", {
-            code: lambda.Code.fromAsset("lambda/productAppLayers"),
-            compatibleRuntimes: [lambda.Runtime.NODEJS_20_X],
-            layerVersionName: "ProductAppLayer",
+        this.productAppLayer = new lambda.LayerVersion(this, "ProductsLayer", {
+            code: lambda.Code.fromAsset("lambda/products/layers/productsLayer"),
+            compatibleRuntimes: [lambda.Runtime.NODEJS_22_X],
+            layerVersionName: "ProductsLayer",
             removalPolicy: cdk.RemovalPolicy.RETAIN
         });
 
-        new ssm.StringParameter(this, "ProductAppLayerVersionArn", {
-            parameterName: "ProductAppLayerVersionArn",
+        new ssm.StringParameter(this, "ProductsLayerVersionArn", {
+            parameterName: "ProductsLayerVersionArn",
             stringValue: this.productAppLayer.layerVersionArn
         });
     }

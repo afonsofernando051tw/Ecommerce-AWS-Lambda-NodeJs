@@ -31,7 +31,7 @@ export class ProductsAppSack extends cdk.Stack {
 
         this.productsFetchHandler = new lambdaNodeJS.NodejsFunction(this,
             "ProductsFetchFunction", {
-                runtime: lambda.Runtime.NODEJS_20_X,
+                runtime: lambda.Runtime.NODEJS_22_X,
                 functionName: "ProductsFetchFunction",
                 entry: "lambda/products/productsFetchFunction.ts",
                 handler: "handler",
@@ -52,7 +52,7 @@ export class ProductsAppSack extends cdk.Stack {
 
          this.productsAdminHandler = new lambdaNodeJS.NodejsFunction(this,
             "ProductsAdminFunction", {
-                runtime: lambda.Runtime.NODEJS_20_X,
+                runtime: lambda.Runtime.NODEJS_22_X,
                 functionName: "ProductsAdminFunction",
                 entry: "lambda/products/productsAdminFunction.ts",
                 handler: "handler",

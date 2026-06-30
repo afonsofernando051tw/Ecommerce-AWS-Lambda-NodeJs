@@ -23,7 +23,14 @@
     "skipLibCheck": true,
     "typeRoots": [
       "./node_modules/@types"
-    ]
+    ],
+    "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "/opt/nodejs/productsLayers": [
+        "lambda/products/layers/productsLayer/nodejs/productRepository"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
