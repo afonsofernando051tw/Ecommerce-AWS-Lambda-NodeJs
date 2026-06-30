@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
-import { ProductsAppSack } from '../lib/productsApp-stack';
+import { ProductsAppStack } from '../lib/productsApp-stack';
 import { EcommerceApiStack } from '../lib/ecommerceApi-stack';
 import * as dotenv from "dotenv"
 import { ProductAppLayersStack } from "../lib/productsAppLayers-stacks"
@@ -23,7 +23,7 @@ const productAppLayersStack = new ProductAppLayersStack(app, "ProductAppLayersSt
   env: cdkEnv
 });
 
-const productsAppStack = new ProductsAppSack(app, "ProductsAppStack", { 
+const productsAppStack = new ProductsAppStack(app, "ProductsAppStack", { 
   tags: tags,
   env: cdkEnv
 });

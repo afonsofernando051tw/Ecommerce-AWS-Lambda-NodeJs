@@ -6,7 +6,7 @@ import { Construct } from "constructs"
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb"
 import * as ssm from "aws-cdk-lib/aws-ssm";
 
-export class ProductsAppSack extends cdk.Stack {
+export class ProductsAppStack extends cdk.Stack {
     readonly productsFetchHandler: lambdaNodeJS.NodejsFunction
     readonly productsAdminHandler: lambdaNodeJS.NodejsFunction
     readonly productsDdb: dynamodb.Table
