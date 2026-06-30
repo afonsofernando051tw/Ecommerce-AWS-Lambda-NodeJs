@@ -1,5 +1,5 @@
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
-import {v4 as uuidß} from "uuid";
+import {v4 as uuid} from "uuid";
 
 export interface Product {
     id: string;
@@ -40,8 +40,8 @@ export class ProductRepository {
     }
 
     async create(product: Product): Promise<Product> {
-        product.id = uuidß();
-        this.dbClient.put({
+        product.id = uuid();
+        await this.dbClient.put({
             TableName: this.productsDdb,
             Item: product
         }).promise();
@@ -83,4 +83,8 @@ export class ProductRepository {
         data.Attributes!.id = productId;
         return data.Attributes as Product;
     }
+}
+
+function uuidv4(): string {
+    throw new Error("Function not implemented.");
 }
