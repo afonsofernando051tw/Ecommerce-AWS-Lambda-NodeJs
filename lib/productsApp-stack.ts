@@ -39,12 +39,16 @@ export class ProductsAppStack extends cdk.Stack {
                 timeout: cdk.Duration.seconds(5),
                 bundling: {
                     minify: true,
-                    sourceMap: false
+                    sourceMap: false,
+                    nodeModules: [
+                        'aws-xray-sdk-core'
+                    ]
                 },
                 environment: {
                     PRODUCTS_DDB: this.productsDdb.tableName          
                 },
-                layers: [productsLayer]
+                layers: [productsLayer],
+                tracing: lambda.Tracing.ACTIVE
             }
         )
 
@@ -60,12 +64,17 @@ export class ProductsAppStack extends cdk.Stack {
                 timeout: cdk.Duration.seconds(5),
                 bundling: {
                     minify: true,
-                    sourceMap: false
+                    sourceMap: false,
+                    nodeModules: [
+                        'aws-xray-sdk-core'
+                    ]      
                 },
                 environment: {
                     PRODUCTS_DDB: this.productsDdb.tableName          
                 },
-                layers: [productsLayer]
+                layers: [productsLayer],
+                tracing: lambda.Tracing.ACTIVE,
+                insightsVersion: lambda.LambdaInsightsVersion.VERSION_1_0_119_0
             }
         )
         this.productsDdb.grantWriteData(this.productsAdminHandler);
